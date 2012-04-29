@@ -1,7 +1,7 @@
 git-branch-editor
 =================
 
-**A command line utility for removing git branches
+**A command line utility for removing git branches**
 
 Edit your local branches:
 
