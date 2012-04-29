@@ -7,7 +7,13 @@ cleanup() {
   rm $all $keep
 }
 
-git branch | grep -v '^*' | sed 's/^  //' | tee $all $keep > /dev/null
+branches=`git branch`
+
+if [ $? != 0 ]; then
+  exit 1
+fi
+
+echo "$branches" | grep -v '^*' | sed 's/^  //' | tee $all $keep > /dev/null
 
 if [ `cat $all | wc -l` == 0 ]; then
   echo "No branches found to delete (cannot delete current branch)."
@@ -21,10 +27,5 @@ delete=`diff --suppress-common-lines $all $keep | grep '^< ' | awk '{print $2}'`
 
 echo $delete | xargs git branch -D
 
-cleanup()
-
-
-
-
-
+cleanup
 
