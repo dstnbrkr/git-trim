@@ -1,19 +1,18 @@
-git-branch-editor
+git-trim
 =================
 
 **A command line utility for removing git branches**
 
-Edit your local branches:
+Trim your local branches:
 
-    git-branch-editor
+    git trim
 
-and view all local branches in your preferred editor. Delete the lines
-containing unwanted branches, save, and git-branch-editor will delete
-those git branches.
+lists all local branches in your preferred $EDITOR. Delete the
+unwanted branches, save, and git-trim will delete removed branches.
 
 Install
 -------
 
-Copy git-branch-editor to your $PATH.
-
+Copy git-trim to your $PATH and git will automatically find the
+'trim' subcommand.
 
