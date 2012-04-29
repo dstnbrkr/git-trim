@@ -5,7 +5,7 @@ git-branch-editor
 
 Edit your local branches:
 
-  git-branch-editor
+    git-branch-editor
 
 and view all local branches in your preferred editor. Delete the lines
 containing unwanted branches, save, and git-branch-editor will delete
