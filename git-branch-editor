@@ -12,7 +12,7 @@ git branch | grep -v '^*' | sed 's/^  //' | tee $all $keep > /dev/null
 if [ `cat $all | wc -l` == 0 ]; then
   echo "No branches found to delete (cannot delete current branch)."
   cleanup
-  exit 1
+  exit 0
 fi
 
 eval $EDITOR $keep
