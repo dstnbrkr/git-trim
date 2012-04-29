@@ -1,6 +1,6 @@
 #!/bin/sh
 
-todo = .git-branch-editor-todo
+todo=.git-branch-editor-todo
 
 git branch | grep -v '^*' | sed 's/^  //'
 
