@@ -1,6 +1,21 @@
 #!/bin/sh
 
-todo=.git-branch-editor-todo
+all=.git-branch-editor-all
+keep=.git-branch-editor-keep
 
-git branch | grep -v '^*' | sed 's/^  //'
+
+git branch | grep -v '^*' | sed 's/^  //' | tee $all $keep > /dev/null
+
+eval $EDITOR $keep
+
+delete=`diff --suppress-common-lines $all $keep | grep '^< ' | awk '{print $2}'`
+
+echo $delete | xargs git branch -D
+
+rm $all $keep
+
+
+
+
+
 
