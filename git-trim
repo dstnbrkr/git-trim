@@ -13,6 +13,10 @@ if [ $? != 0 ]; then
   exit 1
 fi
 
+if [[ ! $EDITOR ]]; then
+  EDITOR=vim
+fi
+
 echo "$branches" | grep -v '^*' | sed 's/^  //' | tee $all $keep > /dev/null
 
 if [ `cat $all | wc -l` == 0 ]; then
@@ -22,6 +26,12 @@ if [ `cat $all | wc -l` == 0 ]; then
 fi
 
 eval $EDITOR $keep
+
+if [ $? != 0 ]; then
+  echo "Unable to open editor '$EDITOR'. Check value of \$EDITOR and try again."
+  cleanup
+  exit 1
+fi
 
 delete=`diff --suppress-common-lines $all $keep | grep '^< ' | awk '{print $2}'`
 
