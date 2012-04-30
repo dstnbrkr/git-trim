@@ -25,6 +25,12 @@ if [ `cat $all | wc -l` == 0 ]; then
   exit 0
 fi
 
+cat >> $keep << EOF
+
+#  Remove the branches you would like to delete.
+
+EOF
+
 eval $EDITOR $keep
 
 if [ $? != 0 ]; then
