@@ -27,7 +27,12 @@ cleanup() {
   rm $all $keep
 }
 
-branches=`git branch`
+if [ $# -eq 0 ]
+then
+  branches=`git branch`
+else
+  branches=`git ls-remote --heads $1 | awk '{print $2}' | awk 'BEGIN { FS = "/" } ; {print $3}'`
+fi
 
 if [ $? != 0 ]; then
   exit 1
@@ -61,7 +66,15 @@ fi
 
 delete=`diff --suppress-common-lines $all $keep | grep '^< ' | awk '{print $2}'`
 
-echo $delete | xargs git branch -D
+if [ $# -eq 0 ]
+then
+  echo $delete | xargs git branch -D
+else
+  for branch in $delete
+  do
+    git push $1 :$branch
+  done
+fi
 
 cleanup
 
